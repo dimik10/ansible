@@ -1,0 +1,30 @@
+#- name: Install packages on CentOS host
+#  ansible.builtin.dnf:
+#    package: "{{ item }}"
+#    state: present
+#  with_items:
+#    - yum-utils
+#    - lvm2
+#    - device-mapper-persistent-data
+
+- name: Add Docker repo CentOS
+  get_url:
+    url:  https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: Install Docker on CentOS host
+  ansible.builtin.dnf:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+#    package: "{{ item }}"
+    state: present
+#  with_items:
+#    - docker-ce
+#    - docker-ce-cli
+#    - containerd.io
+#    - docker-compose-plugin
+
+
